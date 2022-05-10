@@ -2,5 +2,5 @@
 
 public interface IGetInventoriesGateway
 {
-    IList<Models.Inventory> GetAll();
+    Task<IList<Models.Inventory>> GetAll();
 }

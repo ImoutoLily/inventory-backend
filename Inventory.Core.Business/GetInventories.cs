@@ -13,9 +13,9 @@ public class GetInventories
         _getInventories = getInventories;
     }
 
-    public Result<GetInventoriesResult> GetAll()
+    public async Task<Result<GetInventoriesResult>> GetAll()
     {
-        var inventories = _getInventories.GetAll();
+        var inventories = await _getInventories.GetAll();
 
         return Result.Ok(new GetInventoriesResult(inventories));
     }

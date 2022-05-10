@@ -2,5 +2,5 @@
 
 public interface ISaveInventoryGateway
 {
-    Models.Inventory Save(string name);
+    Task<Models.Inventory> Save(string name);
 }

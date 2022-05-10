@@ -14,14 +14,14 @@ public class CreateInventory
         _saveInventory = saveInventory;
     }
 
-    public Result<CreateInventoryResult> Create(string name)
+    public async Task<Result<CreateInventoryResult>> Create(string name)
     {
         if (string.IsNullOrWhiteSpace(name))
         {
             return Result.Fail<CreateInventoryResult>(new InvalidInventoryNameError());
         }
         
-        var inventory = _saveInventory.Save(name);
+        var inventory = await _saveInventory.Save(name);
 
         return Result.Ok(new CreateInventoryResult(inventory));
     }
