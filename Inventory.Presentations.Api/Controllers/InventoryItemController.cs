@@ -11,11 +11,13 @@ public class InventoryItemController : BaseController
 {
     private readonly GetInventoryItems _getInventoryItems;
     private readonly UpdateInventoryItem _updateInventoryItem;
+    private readonly RemoveInventoryItem _removeInventoryItem;
 
-    public InventoryItemController(GetInventoryItems getInventoryItems, UpdateInventoryItem updateInventoryItem)
+    public InventoryItemController(GetInventoryItems getInventoryItems, UpdateInventoryItem updateInventoryItem, RemoveInventoryItem removeInventoryItem)
     {
         _getInventoryItems = getInventoryItems;
         _updateInventoryItem = updateInventoryItem;
+        _removeInventoryItem = removeInventoryItem;
     }
 
     [HttpGet("{id:int}")]
@@ -40,5 +42,13 @@ public class InventoryItemController : BaseController
         var updateResult = await _updateInventoryItem.Update(id, inventoryItem);
 
         return Ok(updateResult);
+    }
+
+    [HttpDelete("{id:int}")]
+    public async Task<IActionResult> Remove(int id)
+    {
+        var result = await _removeInventoryItem.Remove(id);
+
+        return Ok(result);
     }
 }
