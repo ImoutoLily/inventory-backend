@@ -23,10 +23,10 @@ public class UpdateInventory
             return Result.Fail<InventoryResponse>(new InvalidInventoryNameError());
         }
         
-        var inventory = await _updateInventory.UpdateInventory(id, request.Name);
+        var inventory = await _updateInventory.Update(id, request.Name);
 
         return inventory is null 
             ? Result.Fail<InventoryResponse>(new EntityWithIdNotExistsError(typeof(Core.Models.Inventory), id)) 
-            : Result.Ok<InventoryResponse>(new InventoryResponse(inventory));
+            : Result.Ok(new InventoryResponse(inventory));
     }
 }

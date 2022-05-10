@@ -11,7 +11,7 @@ public class UpdateInventoryGateway : BaseDatabaseGateway, IUpdateInventoryGatew
     {
     }
 
-    public async Task<Core.Models.Inventory?> UpdateInventory(int id, string newName)
+    public async Task<Core.Models.Inventory?> Update(int id, string newName)
     {
         var inventory = await Context.Inventories
             .SingleOrDefaultAsync(i => i.Id == id);

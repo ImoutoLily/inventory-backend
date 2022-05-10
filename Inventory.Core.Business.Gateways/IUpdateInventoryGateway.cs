@@ -2,5 +2,5 @@
 
 public interface IUpdateInventoryGateway
 {
-    Task<Models.Inventory?> UpdateInventory(int id, string newName);
+    Task<Models.Inventory?> Update(int id, string newName);
 }
