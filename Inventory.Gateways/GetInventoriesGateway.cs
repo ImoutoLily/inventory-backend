@@ -12,6 +12,14 @@ public class GetInventoriesGateway : IGetInventoriesGateway
     {
         _context = context;
     }
+    
+    public async Task<Core.Models.Inventory?> GetById(int id)
+    {
+        var inventory = await _context.Inventories
+            .SingleOrDefaultAsync(i => i.Id == id);
+
+        return inventory;
+    }
 
     public async Task<IList<Core.Models.Inventory>> GetAll()
     {

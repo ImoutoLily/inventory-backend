@@ -1,8 +1,8 @@
 ﻿namespace Inventory.Core.Business.Models.Result;
 
-public class GetInventoriesResult
+public class GetAllInventoriesResult
 {
-    public GetInventoriesResult(IList<Inventory.Core.Models.Inventory> inventories)
+    public GetAllInventoriesResult(IList<Inventory.Core.Models.Inventory> inventories)
     {
         Inventories = inventories;
     }

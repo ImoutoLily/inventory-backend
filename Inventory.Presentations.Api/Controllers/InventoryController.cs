@@ -17,6 +17,14 @@ public class InventoryController : ControllerBase
         _getInventories = getInventories;
     }
 
+    [HttpGet("{id:int}")]
+    public async Task<IActionResult> GetById(int id)
+    {
+        var result = await _getInventories.GetById(id);
+
+        return Ok(result);
+    }
+
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
