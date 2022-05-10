@@ -13,11 +13,12 @@ public class InventoryController : BaseController
     private readonly UpdateInventory _updateInventory;
     private readonly RemoveInventory _removeInventory;
 
+    private readonly GetInventoryItems _getInventoryItems;
     private readonly CreateInventoryItem _createInventoryItem;
 
     public InventoryController(CreateInventory createInventory, GetInventories getInventories, 
         UpdateInventory updateInventory, RemoveInventory removeInventory, 
-        CreateInventoryItem createInventoryItem)
+        CreateInventoryItem createInventoryItem, GetInventoryItems getInventoryItems)
     {
         _createInventory = createInventory;
         _getInventories = getInventories;
@@ -25,6 +26,7 @@ public class InventoryController : BaseController
         _removeInventory = removeInventory;
         
         _createInventoryItem = createInventoryItem;
+        _getInventoryItems = getInventoryItems;
     }
 
     [HttpGet("{id:int}")]
@@ -67,10 +69,18 @@ public class InventoryController : BaseController
         return Ok(result);
     }
 
-    [HttpPost("{id:int}/Items")]
-    public async Task<IActionResult> AddItem(int id, InventoryItemRequest request)
+    [HttpGet("{inventoryId:int}/Items")]
+    public async Task<IActionResult> GetItems(int inventoryId)
     {
-        var result = await _createInventoryItem.Create(id, request);
+        var result = await _getInventoryItems.GetAllByInventoryId(inventoryId);
+
+        return Ok(result);
+    }
+
+    [HttpPost("{inventoryId:int}/Items")]
+    public async Task<IActionResult> AddItem(int inventoryId, InventoryItemRequest request)
+    {
+        var result = await _createInventoryItem.Create(inventoryId, request);
 
         return Ok(result);
     }
