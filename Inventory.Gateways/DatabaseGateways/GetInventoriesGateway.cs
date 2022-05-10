@@ -14,6 +14,7 @@ public class GetInventoriesGateway : BaseDatabaseGateway, IGetInventoriesGateway
     public async Task<Core.Models.Inventory?> GetById(int id)
     {
         var inventory = await Context.Inventories
+            .Include(i => i.Items)
             .SingleOrDefaultAsync(i => i.Id == id);
 
         return inventory;
@@ -22,6 +23,7 @@ public class GetInventoriesGateway : BaseDatabaseGateway, IGetInventoriesGateway
     public async Task<IList<Core.Models.Inventory>> GetAll()
     {
         var inventories = await Context.Inventories
+            .Include(i => i.Items)
             .ToListAsync();
 
         return inventories;

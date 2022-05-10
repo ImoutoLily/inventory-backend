@@ -1,8 +1,8 @@
 ﻿namespace Inventory.Core.Business.Models.Response;
 
-public class InventoriesResult
+public class InventoriesResponse
 {
-    public InventoriesResult(IList<Inventory.Core.Models.Inventory> inventories)
+    public InventoriesResponse(IList<Inventory.Core.Models.Inventory> inventories)
     {
         Inventories = inventories;
     }

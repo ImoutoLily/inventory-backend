@@ -16,17 +16,17 @@ public class UpdateInventory
         _updateInventory = updateInventory;
     }
 
-    public async Task<Result<InventoryResult>> Update(int id, InventoryRequest request)
+    public async Task<Result<InventoryResponse>> Update(int id, InventoryRequest request)
     {
         if (!InventoryValidator.IsNameValid(request.Name))
         {
-            return Result.Fail<InventoryResult>(new InvalidInventoryNameError());
+            return Result.Fail<InventoryResponse>(new InvalidInventoryNameError());
         }
         
         var inventory = await _updateInventory.UpdateInventory(id, request.Name);
 
         return inventory is null 
-            ? Result.Fail<InventoryResult>(new EntityWithIdNotExistsError(typeof(Core.Models.Inventory), id)) 
-            : Result.Ok<InventoryResult>(new InventoryResult(inventory));
+            ? Result.Fail<InventoryResponse>(new EntityWithIdNotExistsError(typeof(Core.Models.Inventory), id)) 
+            : Result.Ok<InventoryResponse>(new InventoryResponse(inventory));
     }
 }

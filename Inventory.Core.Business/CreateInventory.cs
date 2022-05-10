@@ -16,15 +16,15 @@ public class CreateInventory
         _saveInventory = saveInventory;
     }
 
-    public async Task<Result<InventoryResult>> Create(InventoryRequest request)
+    public async Task<Result<InventoryResponse>> Create(InventoryRequest request)
     {
         if (!InventoryValidator.IsNameValid(request.Name))
         {
-            return Result.Fail<InventoryResult>(new InvalidInventoryNameError());
+            return Result.Fail<InventoryResponse>(new InvalidInventoryNameError());
         }
         
         var inventory = await _saveInventory.Save(request.Name);
 
-        return Result.Ok(new InventoryResult(inventory));
+        return Result.Ok(new InventoryResponse(inventory));
     }
 }
