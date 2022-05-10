@@ -14,23 +14,23 @@ public class GetInventories
         _getInventories = getInventories;
     }
 
-    public async Task<Result<GetInventoryByIdResult>> GetById(int id)
+    public async Task<Result<InventoryResult>> GetById(int id)
     {
         var inventory = await _getInventories.GetById(id);
 
         if (inventory is null)
         {
-            return Result.Fail<GetInventoryByIdResult>(
+            return Result.Fail<InventoryResult>(
                 new EntityWithIdNotExistsError(typeof(Core.Models.Inventory), id));
         }
         
-        return Result.Ok<GetInventoryByIdResult>(new GetInventoryByIdResult(inventory));
+        return Result.Ok(new InventoryResult(inventory));
     }
     
-    public async Task<Result<GetAllInventoriesResult>> GetAll()
+    public async Task<Result<InventoriesResult>> GetAll()
     {
         var inventories = await _getInventories.GetAll();
 
-        return Result.Ok(new GetAllInventoriesResult(inventories));
+        return Result.Ok(new InventoriesResult(inventories));
     }
 }

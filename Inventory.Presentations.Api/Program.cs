@@ -19,9 +19,11 @@ else
 
 builder.Services.AddTransient<IGetInventoriesGateway, GetInventoriesGateway>();
 builder.Services.AddTransient<ISaveInventoryGateway, SaveInventoryGateway>();
+builder.Services.AddTransient<IUpdateInventoryGateway, UpdateInventoryGateway>();
 
 builder.Services.AddTransient<CreateInventory>();
 builder.Services.AddTransient<GetInventories>();
+builder.Services.AddTransient<UpdateInventory>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

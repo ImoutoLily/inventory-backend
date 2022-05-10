@@ -1,6 +1,6 @@
 ﻿namespace Inventory.Core.Business.Models.Request;
 
-public class CreateInventoryRequest
+public class InventoryRequest
 {
     public string Name { get; set; } = null!;
 }

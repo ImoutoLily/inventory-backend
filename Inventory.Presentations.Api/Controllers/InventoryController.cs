@@ -10,11 +10,14 @@ public class InventoryController : ControllerBase
 {
     private readonly CreateInventory _createInventory;
     private readonly GetInventories _getInventories;
+    private readonly UpdateInventory _updateInventory;
 
-    public InventoryController(CreateInventory createInventory, GetInventories getInventories)
+    public InventoryController(CreateInventory createInventory, GetInventories getInventories, 
+        UpdateInventory updateInventory)
     {
         _createInventory = createInventory;
         _getInventories = getInventories;
+        _updateInventory = updateInventory;
     }
 
     [HttpGet("{id:int}")]
@@ -34,9 +37,17 @@ public class InventoryController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(CreateInventoryRequest request)
+    public async Task<IActionResult> Create(InventoryRequest request)
     {
         var result = await _createInventory.Create(request);
+
+        return Ok(result);
+    }
+
+    [HttpPut("{id:int}")]
+    public async Task<IActionResult> Update(int id, InventoryRequest request)
+    {
+        var result = await _updateInventory.Update(id, request);
 
         return Ok(result);
     }

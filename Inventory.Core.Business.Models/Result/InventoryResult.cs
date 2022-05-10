@@ -1,8 +1,8 @@
 ﻿namespace Inventory.Core.Business.Models.Result;
 
-public class CreateInventoryResult
+public class InventoryResult
 {
-    public CreateInventoryResult(Inventory.Core.Models.Inventory inventory)
+    public InventoryResult(Inventory.Core.Models.Inventory inventory)
     {
         Inventory = inventory;
     }
