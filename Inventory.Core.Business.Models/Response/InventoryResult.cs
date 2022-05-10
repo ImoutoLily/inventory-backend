@@ -1,4 +1,4 @@
-﻿namespace Inventory.Core.Business.Models.Result;
+﻿namespace Inventory.Core.Business.Models.Response;
 
 public class InventoryResult
 {
