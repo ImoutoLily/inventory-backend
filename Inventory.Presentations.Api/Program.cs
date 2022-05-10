@@ -1,6 +1,27 @@
+using Inventory.Core.Business;
+using Inventory.Core.Business.Gateways;
+using Inventory.Database.Context;
+using Inventory.Gateways;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.AddDbContext<InventoryContext>(o => o.UseInMemoryDatabase(databaseName: "inventory-db"));
+}
+else
+{
+    // TODO: connect to persistent database
+}
+
+builder.Services.AddTransient<IGetInventoriesGateway, GetInventoriesGateway>();
+builder.Services.AddTransient<ISaveInventoryGateway, SaveInventoryGateway>();
+
+builder.Services.AddTransient<CreateInventory>();
+builder.Services.AddTransient<GetInventories>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -19,7 +19,9 @@ public class SaveInventoryGateway : ISaveInventoryGateway
             Name = name
         };
 
-        await _context.Inventories.AddAsync(inventory);
+        _context.Inventories.Add(inventory);
+
+        await _context.SaveChangesAsync();
 
         return inventory;
     }

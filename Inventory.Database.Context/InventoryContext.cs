@@ -8,6 +8,10 @@ public class InventoryContext : DbContext
 {
     public DbSet<Core.Models.Inventory> Inventories { get; set; } = null!;
     public DbSet<InventoryItem> InventoryItems { get; set; } = null!;
+
+    public InventoryContext(DbContextOptions<InventoryContext> options) : base(options)
+    {
+    }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

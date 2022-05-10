@@ -12,7 +12,10 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Controllers" />
+      <ProjectReference Include="..\Inventory.Core.Business.Gateways\Inventory.Core.Business.Gateways.csproj" />
+      <ProjectReference Include="..\Inventory.Core.Business\Inventory.Core.Business.csproj" />
+      <ProjectReference Include="..\Inventory.Database.Context\Inventory.Database.Context.csproj" />
+      <ProjectReference Include="..\Inventory.Gateways\Inventory.Gateways.csproj" />
     </ItemGroup>
 
 </Project>
