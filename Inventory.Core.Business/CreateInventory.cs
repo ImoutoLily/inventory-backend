@@ -3,6 +3,7 @@ using Inventory.Core.Business.Gateways;
 using Inventory.Core.Business.Models.Core;
 using Inventory.Core.Business.Models.Request;
 using Inventory.Core.Business.Models.Result;
+using Inventory.Core.Business.Validators;
 
 namespace Inventory.Core.Business;
 
@@ -17,7 +18,7 @@ public class CreateInventory
 
     public async Task<Result<CreateInventoryResult>> Create(CreateInventoryRequest request)
     {
-        if (string.IsNullOrWhiteSpace(request.Name))
+        if (!InventoryValidator.IsNameValid(request.Name))
         {
             return Result.Fail<CreateInventoryResult>(new InvalidInventoryNameError());
         }
