@@ -2,6 +2,7 @@
 using Inventory.Core.Business.Gateways;
 using Inventory.Database.Context;
 using Inventory.Gateways;
+using Inventory.Gateways.DatabaseGateways;
 using Microsoft.EntityFrameworkCore;
 
 namespace Inventory.Presentations.Api.Extensions;

@@ -1,28 +1,26 @@
 ﻿using Inventory.Core.Business.Gateways;
 using Inventory.Database.Context;
+using Inventory.Gateways.Abstract;
 using Microsoft.EntityFrameworkCore;
 
-namespace Inventory.Gateways;
+namespace Inventory.Gateways.DatabaseGateways;
 
-public class UpdateInventoryGateway : IUpdateInventoryGateway
+public class UpdateInventoryGateway : BaseDatabaseGateway, IUpdateInventoryGateway
 {
-    private readonly InventoryContext _context;
-
-    public UpdateInventoryGateway(InventoryContext context)
+    public UpdateInventoryGateway(InventoryContext context) : base(context)
     {
-        _context = context;
     }
 
     public async Task<Core.Models.Inventory?> UpdateInventory(int id, string newName)
     {
-        var inventory = await _context.Inventories
+        var inventory = await Context.Inventories
             .SingleOrDefaultAsync(i => i.Id == id);
 
         if (inventory is null) return null;
 
         inventory.Name = newName;
 
-        await _context.SaveChangesAsync();
+        await Context.SaveChangesAsync();
 
         return inventory;
     }
