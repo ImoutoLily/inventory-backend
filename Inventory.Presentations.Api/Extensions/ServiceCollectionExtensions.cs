@@ -29,7 +29,8 @@ public static class ServiceCollectionExtensions
     {
         services.AddTransient<IGetInventoriesGateway, GetInventoriesGateway>()
             .AddTransient<ISaveInventoryGateway, SaveInventoryGateway>()
-            .AddTransient<IUpdateInventoryGateway, UpdateInventoryGateway>();
+            .AddTransient<IUpdateInventoryGateway, UpdateInventoryGateway>()
+            .AddTransient<IRemoveInventoryGateway, RemoveInventoryGateway>();
 
         return services;
     }
@@ -38,7 +39,8 @@ public static class ServiceCollectionExtensions
     {
         services.AddTransient<CreateInventory>()
             .AddTransient<GetInventories>()
-            .AddTransient<UpdateInventory>();
+            .AddTransient<UpdateInventory>()
+            .AddTransient<RemoveInventory>();
 
         return services;
     }
