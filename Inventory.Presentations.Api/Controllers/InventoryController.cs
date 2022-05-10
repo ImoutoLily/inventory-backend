@@ -1,5 +1,6 @@
 ﻿using Inventory.Core.Business;
 using Inventory.Core.Business.Models.Request;
+using Inventory.Core.Models;
 using Inventory.Presentations.Api.Controllers.Abstract;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,13 +13,18 @@ public class InventoryController : BaseController
     private readonly UpdateInventory _updateInventory;
     private readonly RemoveInventory _removeInventory;
 
+    private readonly CreateInventoryItem _createInventoryItem;
+
     public InventoryController(CreateInventory createInventory, GetInventories getInventories, 
-        UpdateInventory updateInventory, RemoveInventory removeInventory)
+        UpdateInventory updateInventory, RemoveInventory removeInventory, 
+        CreateInventoryItem createInventoryItem)
     {
         _createInventory = createInventory;
         _getInventories = getInventories;
         _updateInventory = updateInventory;
         _removeInventory = removeInventory;
+        
+        _createInventoryItem = createInventoryItem;
     }
 
     [HttpGet("{id:int}")]
@@ -57,6 +63,14 @@ public class InventoryController : BaseController
     public async Task<IActionResult> Remove(int id)
     {
         var result = await _removeInventory.Remove(id);
+
+        return Ok(result);
+    }
+
+    [HttpPost("{id:int}/Items")]
+    public async Task<IActionResult> AddItem(int id, InventoryItemRequest request)
+    {
+        var result = await _createInventoryItem.Create(id, request);
 
         return Ok(result);
     }

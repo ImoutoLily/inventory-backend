@@ -2,7 +2,6 @@
 
 public class InventoryItemRequest
 {
-    public int InventoryId { get; set; }
     public string Name { get; set; } = null!;
     public int Count { get; } = 0;
     public double? PricePerItem { get; set; }

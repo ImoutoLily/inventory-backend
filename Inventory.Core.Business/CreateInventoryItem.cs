@@ -16,22 +16,22 @@ public class CreateInventoryItem
         _createInventoryItem = createInventoryItem;
     }
 
-    public async Task<Result<InventoryItemResponse>> Create(InventoryItemRequest request)
+    public async Task<Result<InventoryItemResponse>> Create(int inventoryId, InventoryItemRequest request)
     {
         if (!InventoryItemValidator.IsNameValid(request.Name))
         {
             return Result.Fail<InventoryItemResponse>(new InvalidInventoryItemNamError());
         }
 
-        var inventoryItem = await _createInventoryItem.Create(request.InventoryId, request.Name, 
-            request.Count, request.PricePerItem, request.AdditionalInformation);
+        var inventoryItem = await _createInventoryItem.Create(inventoryId, request.Name, request.Count, 
+            request.PricePerItem, request.AdditionalInformation);
 
         if (inventoryItem is null)
         {
             return Result.Fail<InventoryItemResponse>(
-                new EntityWithIdNotExistsError(typeof(Core.Models.Inventory), request.InventoryId));
+                new EntityWithIdNotExistsError(typeof(Core.Models.Inventory), inventoryId));
         }
 
-        return Result.Ok(new InventoryItemResponse(request.InventoryId, inventoryItem));
+        return Result.Ok(new InventoryItemResponse(inventoryItem));
     }
 }
