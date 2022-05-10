@@ -1,12 +1,11 @@
 ﻿using Inventory.Core.Business;
 using Inventory.Core.Business.Models.Request;
+using Inventory.Presentations.Api.Controllers.Abstract;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Inventory.Presentations.Api.Controllers;
 
-[ApiController]
-[Route("api/v1/[controller]")]
-public class InventoryController : ControllerBase
+public class InventoryController : BaseController
 {
     private readonly CreateInventory _createInventory;
     private readonly GetInventories _getInventories;

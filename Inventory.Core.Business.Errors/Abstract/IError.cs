@@ -1,4 +1,4 @@
-﻿namespace Inventory.Core.Business.Errors;
+﻿namespace Inventory.Core.Business.Errors.Abstract;
 
 public interface IError
 {
