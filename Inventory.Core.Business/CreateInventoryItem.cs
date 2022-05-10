@@ -19,12 +19,14 @@ public class CreateInventoryItem
     public async Task<Result<InventoryItemResponse>> Create(int inventoryId, InventoryItemRequest request)
     {
         if (!InventoryItemValidator.IsNameValid(request.Name))
-        {
             return Result.Fail<InventoryItemResponse>(new InvalidInventoryItemNamError());
-        }
+        if (!InventoryItemValidator.IsCountValid(request.Count))
+            return Result.Fail<InventoryItemResponse>(new InvalidCountError());
+        if (!InventoryItemValidator.IsPricePerItemValid(request.PricePerItem))
+            return Result.Fail<InventoryItemResponse>(new InvalidPricePerItemError());
 
         var inventoryItem = await _createInventoryItem.Create(inventoryId, request.Name, request.Count, 
-            request.PricePerItem, request.AdditionalInformation);
+        request.PricePerItem, request.AdditionalInformation);
 
         if (inventoryItem is null)
         {
