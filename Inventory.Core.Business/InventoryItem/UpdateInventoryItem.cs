@@ -1,12 +1,12 @@
 ﻿using Inventory.Core.Business.Errors;
 using Inventory.Core.Business.Gateways;
+using Inventory.Core.Business.Gateways.InventoryItem;
 using Inventory.Core.Business.Models.Core;
 using Inventory.Core.Business.Models.Request;
 using Inventory.Core.Business.Models.Response;
 using Inventory.Core.Business.Validators;
-using Inventory.Core.Models;
 
-namespace Inventory.Core.Business;
+namespace Inventory.Core.Business.InventoryItem;
 
 public class UpdateInventoryItem
 {
@@ -28,7 +28,7 @@ public class UpdateInventoryItem
             request.Count, request.PricePerItem, request.AdditionalInformation);
         
         return inventoryItem is null
-            ? Result.Fail<InventoryItemResponse>(new EntityWithIdNotExistsError(typeof(InventoryItem), id))
+            ? Result.Fail<InventoryItemResponse>(new EntityWithIdNotExistsError(typeof(Core.Models.InventoryItem), id))
             : Result.Ok(new InventoryItemResponse(inventoryItem));
     }
 }

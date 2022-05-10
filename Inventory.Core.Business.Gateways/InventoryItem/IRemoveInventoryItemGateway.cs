@@ -1,4 +1,4 @@
-﻿namespace Inventory.Core.Business.Gateways;
+﻿namespace Inventory.Core.Business.Gateways.InventoryItem;
 
 public interface IRemoveInventoryItemGateway
 {

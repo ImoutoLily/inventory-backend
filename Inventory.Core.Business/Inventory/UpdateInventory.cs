@@ -1,11 +1,12 @@
 ﻿using Inventory.Core.Business.Errors;
 using Inventory.Core.Business.Gateways;
+using Inventory.Core.Business.Gateways.Inventory;
 using Inventory.Core.Business.Models.Core;
 using Inventory.Core.Business.Models.Request;
 using Inventory.Core.Business.Models.Response;
 using Inventory.Core.Business.Validators;
 
-namespace Inventory.Core.Business;
+namespace Inventory.Core.Business.Inventory;
 
 public class UpdateInventory
 {

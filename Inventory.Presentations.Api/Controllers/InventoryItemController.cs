@@ -1,4 +1,5 @@
 ﻿using Inventory.Core.Business;
+using Inventory.Core.Business.InventoryItem;
 using Inventory.Core.Business.Models.Request;
 using Inventory.Presentations.Api.Controllers.Abstract;
 using Mapster;

@@ -1,10 +1,9 @@
-﻿using Inventory.Core.Business.Gateways;
-using Inventory.Core.Models;
+﻿using Inventory.Core.Business.Gateways.InventoryItem;
 using Inventory.Database.Context;
 using Inventory.Gateways.Abstract;
 using Microsoft.EntityFrameworkCore;
 
-namespace Inventory.Gateways.DatabaseGateways;
+namespace Inventory.Gateways.DatabaseGateways.InventoryItem;
 
 public class CreateInventoryItemGateway : BaseDatabaseGateway, ICreateInventoryItemGateway
 {
@@ -12,7 +11,7 @@ public class CreateInventoryItemGateway : BaseDatabaseGateway, ICreateInventoryI
     {
     }
 
-    public async Task<InventoryItem?> Create(int inventoryId, string name, 
+    public async Task<Core.Models.InventoryItem?> Create(int inventoryId, string name, 
         int? count = null, double? pricePerItem = null, string? additionalInformation = null)
     {
         var inventory = await Context.Inventories
@@ -20,7 +19,7 @@ public class CreateInventoryItemGateway : BaseDatabaseGateway, ICreateInventoryI
 
         if (inventory is null) return null;
 
-        var inventoryItem = new InventoryItem
+        var inventoryItem = new Core.Models.InventoryItem
         {
             Name = name,
             Count = count ?? 0,

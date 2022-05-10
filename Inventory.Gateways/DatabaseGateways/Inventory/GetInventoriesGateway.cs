@@ -1,9 +1,9 @@
-﻿using Inventory.Core.Business.Gateways;
+﻿using Inventory.Core.Business.Gateways.Inventory;
 using Inventory.Database.Context;
 using Inventory.Gateways.Abstract;
 using Microsoft.EntityFrameworkCore;
 
-namespace Inventory.Gateways.DatabaseGateways;
+namespace Inventory.Gateways.DatabaseGateways.Inventory;
 
 public class GetInventoriesGateway : BaseDatabaseGateway, IGetInventoriesGateway
 {

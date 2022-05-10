@@ -1,10 +1,10 @@
 ﻿using Inventory.Core.Business.Errors;
 using Inventory.Core.Business.Gateways;
+using Inventory.Core.Business.Gateways.InventoryItem;
 using Inventory.Core.Business.Models.Core;
 using Inventory.Core.Business.Models.Response;
-using Inventory.Core.Models;
 
-namespace Inventory.Core.Business;
+namespace Inventory.Core.Business.InventoryItem;
 
 public class GetInventoryItems
 {
@@ -22,7 +22,7 @@ public class GetInventoryItems
         if (inventoryItem is null)
         {
             return Result.Fail<InventoryItemResponse>(
-                new EntityWithIdNotExistsError(typeof(InventoryItem), id));
+                new EntityWithIdNotExistsError(typeof(Core.Models.InventoryItem), id));
         }
         
         return Result.Ok(new InventoryItemResponse(inventoryItem));

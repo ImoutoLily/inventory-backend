@@ -1,19 +1,20 @@
 ﻿using Inventory.Core.Business.Errors;
 using Inventory.Core.Business.Gateways;
+using Inventory.Core.Business.Gateways.Inventory;
 using Inventory.Core.Business.Models.Core;
 using Inventory.Core.Business.Models.Request;
 using Inventory.Core.Business.Models.Response;
 using Inventory.Core.Business.Validators;
 
-namespace Inventory.Core.Business;
+namespace Inventory.Core.Business.Inventory;
 
 public class CreateInventory
 {
-    private readonly ISaveInventoryGateway _saveInventory;
+    private readonly ICreateInventoryGateway _createInventory;
 
-    public CreateInventory(ISaveInventoryGateway saveInventory)
+    public CreateInventory(ICreateInventoryGateway createInventory)
     {
-        _saveInventory = saveInventory;
+        _createInventory = createInventory;
     }
 
     public async Task<Result<InventoryResponse>> Create(InventoryRequest request)
@@ -23,7 +24,7 @@ public class CreateInventory
             return Result.Fail<InventoryResponse>(new InvalidInventoryNameError());
         }
         
-        var inventory = await _saveInventory.Save(request.Name);
+        var inventory = await _createInventory.Save(request.Name);
 
         return Result.Ok(new InventoryResponse(inventory));
     }

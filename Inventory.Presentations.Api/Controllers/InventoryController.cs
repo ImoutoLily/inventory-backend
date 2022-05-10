@@ -1,4 +1,6 @@
 ﻿using Inventory.Core.Business;
+using Inventory.Core.Business.Inventory;
+using Inventory.Core.Business.InventoryItem;
 using Inventory.Core.Business.Models.Request;
 using Inventory.Core.Models;
 using Inventory.Presentations.Api.Controllers.Abstract;

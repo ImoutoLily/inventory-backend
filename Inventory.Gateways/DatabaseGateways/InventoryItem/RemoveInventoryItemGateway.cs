@@ -1,9 +1,9 @@
-﻿using Inventory.Core.Business.Gateways;
+﻿using Inventory.Core.Business.Gateways.InventoryItem;
 using Inventory.Database.Context;
 using Inventory.Gateways.Abstract;
 using Microsoft.EntityFrameworkCore;
 
-namespace Inventory.Gateways.DatabaseGateways;
+namespace Inventory.Gateways.DatabaseGateways.InventoryItem;
 
 public class RemoveInventoryItemGateway : BaseDatabaseGateway, IRemoveInventoryItemGateway
 {

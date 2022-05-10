@@ -1,12 +1,12 @@
-﻿using Inventory.Core.Business.Gateways;
+﻿using Inventory.Core.Business.Gateways.Inventory;
 using Inventory.Database.Context;
 using Inventory.Gateways.Abstract;
 
-namespace Inventory.Gateways.DatabaseGateways;
+namespace Inventory.Gateways.DatabaseGateways.Inventory;
 
-public class SaveInventoryGateway : BaseDatabaseGateway, ISaveInventoryGateway
+public class CreateInventoryGateway : BaseDatabaseGateway, ICreateInventoryGateway
 {
-    public SaveInventoryGateway(InventoryContext context) : base(context)
+    public CreateInventoryGateway(InventoryContext context) : base(context)
     {
     }
 

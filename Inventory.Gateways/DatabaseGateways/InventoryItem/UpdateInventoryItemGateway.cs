@@ -1,10 +1,9 @@
-﻿using Inventory.Core.Business.Gateways;
-using Inventory.Core.Models;
+﻿using Inventory.Core.Business.Gateways.InventoryItem;
 using Inventory.Database.Context;
 using Inventory.Gateways.Abstract;
 using Microsoft.EntityFrameworkCore;
 
-namespace Inventory.Gateways.DatabaseGateways;
+namespace Inventory.Gateways.DatabaseGateways.InventoryItem;
 
 public class UpdateInventoryItemGateway : BaseDatabaseGateway, IUpdateInventoryItemGateway
 {
@@ -12,7 +11,7 @@ public class UpdateInventoryItemGateway : BaseDatabaseGateway, IUpdateInventoryI
     {
     }
 
-    public async Task<InventoryItem?> Update(int id, string name, int? count, double? pricePerItem, string? additionalInformation)
+    public async Task<Core.Models.InventoryItem?> Update(int id, string name, int? count, double? pricePerItem, string? additionalInformation)
     {
         var inventoryItem = await Context.InventoryItems
             .SingleOrDefaultAsync(ii => ii.Id == id);
