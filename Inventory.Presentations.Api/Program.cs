@@ -5,9 +5,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services
+    .AddAppsettings(builder.Configuration)
     .AddInventoryContext(builder.Environment)
+    .AddIdentity()
     .AddGateways()
-    .AddUseCases();
+    .AddUseCases()
+    .AddJwt();
 
 builder.Services
     .AddControllers()
@@ -28,6 +31,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

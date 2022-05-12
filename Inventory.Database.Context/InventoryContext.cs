@@ -1,10 +1,13 @@
 ﻿using System.Reflection;
 using Inventory.Core.Models;
+using Inventory.Database.Context.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Inventory.Database.Context;
 
-public class InventoryContext : DbContext
+public class InventoryContext : IdentityDbContext<InventoryIdentityUser>
 {
     public DbSet<Core.Models.Inventory> Inventories { get; set; } = null!;
     public DbSet<InventoryItem> InventoryItems { get; set; } = null!;
@@ -15,6 +18,8 @@ public class InventoryContext : DbContext
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
+        
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
     }
 }

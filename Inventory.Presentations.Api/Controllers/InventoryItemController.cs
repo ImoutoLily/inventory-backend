@@ -3,11 +3,13 @@ using Inventory.Core.Business.InventoryItem;
 using Inventory.Core.Business.Models.Request;
 using Inventory.Presentations.Api.Controllers.Abstract;
 using Mapster;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Inventory.Presentations.Api.Controllers;
 
+[Authorize]
 public class InventoryItemController : BaseController
 {
     private readonly GetInventoryItems _getInventoryItems;

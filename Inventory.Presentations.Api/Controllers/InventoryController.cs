@@ -1,13 +1,13 @@
-﻿using Inventory.Core.Business;
-using Inventory.Core.Business.Inventory;
+﻿using Inventory.Core.Business.Inventory;
 using Inventory.Core.Business.InventoryItem;
 using Inventory.Core.Business.Models.Request;
-using Inventory.Core.Models;
 using Inventory.Presentations.Api.Controllers.Abstract;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Inventory.Presentations.Api.Controllers;
 
+[Authorize]
 public class InventoryController : BaseController
 {
     private readonly CreateInventory _createInventory;

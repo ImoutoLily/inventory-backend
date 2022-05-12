@@ -26,6 +26,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventory.Gateways", "Inven
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventory.Core.Business.Validators", "Inventory.Core.Business.Validators\Inventory.Core.Business.Validators.csproj", "{DED74D73-E9EC-446F-98E3-6927538C2DE1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventory.Presentations.Jwt", "Inventory.Presentations.Jwt\Inventory.Presentations.Jwt.csproj", "{50EC22D5-ADBE-4068-9261-97C75156649F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -68,6 +70,10 @@ Global
 		{DED74D73-E9EC-446F-98E3-6927538C2DE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DED74D73-E9EC-446F-98E3-6927538C2DE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DED74D73-E9EC-446F-98E3-6927538C2DE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50EC22D5-ADBE-4068-9261-97C75156649F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50EC22D5-ADBE-4068-9261-97C75156649F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50EC22D5-ADBE-4068-9261-97C75156649F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50EC22D5-ADBE-4068-9261-97C75156649F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A912075A-374D-48ED-A16A-1223E235D97D} = {C67E4AC4-D527-44AC-ABCA-D4843C37DB75}
@@ -79,5 +85,6 @@ Global
 		{412D381A-67DF-4560-9832-C8EF53E4CFF2} = {20B7FFAB-E754-41D2-805B-D60F4D1316C4}
 		{72D235DC-E71E-4C11-99C5-997D64D96B7C} = {50D68383-018E-4D46-8175-9310B5CCF964}
 		{DED74D73-E9EC-446F-98E3-6927538C2DE1} = {C67E4AC4-D527-44AC-ABCA-D4843C37DB75}
+		{50EC22D5-ADBE-4068-9261-97C75156649F} = {DA030D52-A707-4E46-856D-62984C7B4260}
 	EndGlobalSection
 EndGlobal

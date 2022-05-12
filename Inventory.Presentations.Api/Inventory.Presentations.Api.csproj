@@ -8,7 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Mapster" Version="7.3.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.5" />
         <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="6.0.5" />
         <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.5" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.5" />
@@ -19,6 +19,7 @@
       <ProjectReference Include="..\Inventory.Core.Business\Inventory.Core.Business.csproj" />
       <ProjectReference Include="..\Inventory.Database.Context\Inventory.Database.Context.csproj" />
       <ProjectReference Include="..\Inventory.Gateways\Inventory.Gateways.csproj" />
+      <ProjectReference Include="..\Inventory.Presentations.Jwt\Inventory.Presentations.Jwt.csproj" />
     </ItemGroup>
 
 </Project>
