@@ -1,4 +1,5 @@
 using Inventory.Presentations.Api.Extensions;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +18,29 @@ builder.Services
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services
     .AddEndpointsApiExplorer()
-    .AddSwaggerGen();
+    .AddSwaggerGen(options =>
+    {
+        options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+        {
+            In = ParameterLocation.Header,
+            Description = "Please insert JWT with Bearer into the headers",
+            Name = "Authorization",
+            Type = SecuritySchemeType.ApiKey
+        });
+        options.AddSecurityRequirement(new OpenApiSecurityRequirement {
+            { 
+                new OpenApiSecurityScheme 
+                { 
+                    Reference = new OpenApiReference 
+                    { 
+                        Type = ReferenceType.SecurityScheme,
+                        Id = "Bearer" 
+                    } 
+                },
+                Array.Empty<string>()
+            } 
+        });
+    });
 
 var app = builder.Build();
 
