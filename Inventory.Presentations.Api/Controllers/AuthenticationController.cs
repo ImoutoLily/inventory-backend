@@ -2,6 +2,7 @@
 using Inventory.Core.Business.Models.Request;
 using Inventory.Presentations.Api.Controllers.Abstract;
 using Inventory.Presentations.Jwt.Services.Abstract;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Inventory.Presentations.Api.Controllers;
@@ -19,6 +20,7 @@ public class AuthenticationController : BaseController
     }
 
     [HttpPost("Login")]
+    [AllowAnonymous]
     public async Task<IActionResult> Login(AuthenticationRequest request)
     {
         var result = await _authenticate.Login(request);
@@ -34,6 +36,7 @@ public class AuthenticationController : BaseController
     }
 
     [HttpPost("Register")]
+    [AllowAnonymous]
     public async Task<IActionResult> Register(AuthenticationRequest request)
     {
         var result = await _authenticate.Register(request);

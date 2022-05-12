@@ -3,7 +3,6 @@ using Inventory.Presentations.Api.Extensions;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services
     .AddAppsettings(builder.Configuration)
     .AddInventoryContext(builder.Environment)
