@@ -1,6 +1,7 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Inventory.Core.Models;
 using Inventory.Presentations.Jwt.Models;
 using Inventory.Presentations.Jwt.Services.Abstract;
 using Microsoft.IdentityModel.Tokens;
@@ -18,13 +19,15 @@ public class JwtTokenService : IJwtTokenService
         _tokenHandler = new JwtSecurityTokenHandler();
     }
 
-    public JwtTokenResult GenerateToken(string username)
+    public JwtTokenResult GenerateToken(User user)
     {
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(new []
             {
-                new Claim(ClaimTypes.NameIdentifier, username)
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim(ClaimTypes.NameIdentifier, user.Id),
             }),
             Expires = DateTime.Now.AddHours(1),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(_keyBytes), 

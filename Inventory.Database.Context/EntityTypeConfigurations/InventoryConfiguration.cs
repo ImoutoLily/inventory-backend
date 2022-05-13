@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Inventory.Database.Context.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Inventory.Database.Context.EntityTypeConfigurations;
@@ -12,5 +13,12 @@ public class InventoryConfiguration : IEntityTypeConfiguration<Core.Models.Inven
         builder.Property(i => i.Name)
             .IsRequired()
             .HasMaxLength(64);
+
+        builder.HasMany(i => i.Items)
+            .WithOne(ii => ii.Inventory);
+
+        builder.HasOne<DatabaseUser>()
+            .WithMany(du => du.Inventories)
+            .HasForeignKey(i => i.CreatorId);
     }
 }

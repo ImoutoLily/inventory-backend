@@ -1,4 +1,5 @@
-﻿using Inventory.Adapters.Models.Request;
+﻿using System.Security.Claims;
+using Inventory.Adapters.Models.Request;
 using Inventory.Core.Business.Inventory;
 using Inventory.Core.Business.InventoryItem;
 using Inventory.Core.Models;
@@ -50,7 +51,9 @@ public class InventoryController : BaseController
     [HttpPost]
     public async Task<IActionResult> Create(InventoryRequest request)
     {
-        var result = await _createInventory.Create(request.Adapt<Core.Models.Inventory>());
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        
+        var result = await _createInventory.Create(userId, request.Adapt<Core.Models.Inventory>());
 
         return Ok(result);
     }

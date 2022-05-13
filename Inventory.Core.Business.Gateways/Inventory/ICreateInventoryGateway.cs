@@ -2,5 +2,5 @@
 
 public interface ICreateInventoryGateway
 {
-    Task<Models.Inventory> Save(string name);
+    Task<Models.Inventory> Save(string creatorId, string name);
 }

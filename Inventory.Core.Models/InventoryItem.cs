@@ -7,4 +7,5 @@ public class InventoryItem
     public int Count { get; set; }
     public double? PricePerItem { get; set; }
     public string? AdditionalInformation { get; set; }
+    public Inventory Inventory { get; set; } = null!;
 }

@@ -14,14 +14,14 @@ public class CreateInventory
         _createInventory = createInventory;
     }
 
-    public async Task<Result<Core.Models.Inventory>> Create(Core.Models.Inventory request)
+    public async Task<Result<Core.Models.Inventory>> Create(string creatorId, Core.Models.Inventory request)
     {
         if (!InventoryValidator.IsNameValid(request.Name))
         {
             return Result.Fail<Core.Models.Inventory>(new InvalidInventoryNameError());
         }
         
-        var inventory = await _createInventory.Save(request.Name);
+        var inventory = await _createInventory.Save(creatorId, request.Name);
 
         return Result.Ok(inventory);
     }
