@@ -23,9 +23,10 @@ builder.Services
         options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
         {
             In = ParameterLocation.Header,
-            Description = "Please insert JWT with Bearer into the headers",
-            Name = "Authorization",
-            Type = SecuritySchemeType.ApiKey
+            Type = SecuritySchemeType.Http,
+            Scheme = "Bearer",
+            BearerFormat = "JWT",
+            Description = "JWT Authorization header using Bearer scheme."
         });
         options.AddSecurityRequirement(new OpenApiSecurityRequirement {
             { 
