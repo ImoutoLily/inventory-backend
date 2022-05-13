@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Inventory.Database.Context;
 
-public class InventoryContext : IdentityDbContext<InventoryIdentityUser>
+public class InventoryContext : IdentityDbContext<DatabaseUser>
 {
     public DbSet<Core.Models.Inventory> Inventories { get; set; } = null!;
     public DbSet<InventoryItem> InventoryItems { get; set; } = null!;

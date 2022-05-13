@@ -11,10 +11,10 @@ namespace Inventory.Gateways.DatabaseGateways.Authentication;
 
 public class AuthenticateGateway : BaseDatabaseGateway, IAuthenticateGateway
 {
-    private readonly UserManager<InventoryIdentityUser> _userManager;
+    private readonly UserManager<DatabaseUser> _userManager;
 
     public AuthenticateGateway(InventoryContext context, 
-        UserManager<InventoryIdentityUser> userManager) : base(context)
+        UserManager<DatabaseUser> userManager) : base(context)
     {
         _userManager = userManager;
     }
@@ -38,7 +38,7 @@ public class AuthenticateGateway : BaseDatabaseGateway, IAuthenticateGateway
 
         if (storedUser is not null) return null;
 
-        var user = new InventoryIdentityUser
+        var user = new DatabaseUser
         {
             Email = email,
             UserName = username
@@ -49,7 +49,7 @@ public class AuthenticateGateway : BaseDatabaseGateway, IAuthenticateGateway
         return user.Adapt<User>();
     }
 
-    private async Task<InventoryIdentityUser?> GetUserByEmailOrUsername(string? email, string? username)
+    private async Task<DatabaseUser?> GetUserByEmailOrUsername(string? email, string? username)
     {
         if (email is not null)
         {

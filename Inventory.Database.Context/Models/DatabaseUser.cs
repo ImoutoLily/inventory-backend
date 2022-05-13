@@ -2,7 +2,7 @@
 
 namespace Inventory.Database.Context.Models;
 
-public class InventoryIdentityUser : IdentityUser
+public class DatabaseUser : IdentityUser
 {
     public IList<Core.Models.Inventory> Inventories { get; set; } = new List<Core.Models.Inventory>();
 }

@@ -72,7 +72,7 @@ public static class ServiceCollectionExtensions
 
     private static IServiceCollection AddIdentity(this IServiceCollection services)
     {
-        services.AddIdentity<InventoryIdentityUser, IdentityRole>(
+        services.AddIdentity<DatabaseUser, IdentityRole>(
             o =>
             {
                 o.Password.RequiredLength = 8;
