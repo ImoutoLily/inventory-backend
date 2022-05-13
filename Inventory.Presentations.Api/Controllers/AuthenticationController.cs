@@ -30,9 +30,9 @@ public class AuthenticationController : BaseController
             return Ok(result);
         }
 
-        var token = _tokenService.GenerateToken(result.Value!.UserName);
+        var tokenResult = _tokenService.GenerateToken(result.Value!.UserName);
 
-        return Ok(token);
+        return Ok(tokenResult);
     }
 
     [HttpPost("Register")]
@@ -46,8 +46,8 @@ public class AuthenticationController : BaseController
             return Ok(result);
         }
 
-        var token = _tokenService.GenerateToken(result.Value!.UserName);
+        var tokenResult = _tokenService.GenerateToken(result.Value!.UserName);
 
-        return Ok(token);
+        return Ok(tokenResult);
     }
 }
