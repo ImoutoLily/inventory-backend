@@ -19,11 +19,10 @@ public class AuthenticateGateway : BaseDatabaseGateway, IAuthenticateGateway
         _userManager = userManager;
     }
 
-    public async Task<User?> Login(string username, string password)
+    public async Task<User?> Login(string? email, string? username, string password)
     {
-        var user = await Context.Users
-            .SingleOrDefaultAsync(u => u.UserName == username);
-
+        var user = await GetUserByEmailOrUsername(email, username);
+        
         if (user is null || !await _userManager.CheckPasswordAsync(user, password))
         {
             return null;
@@ -32,7 +31,7 @@ public class AuthenticateGateway : BaseDatabaseGateway, IAuthenticateGateway
         return user.Adapt<User>();
     }
 
-    public async Task<User?> Register(string username, string password)
+    public async Task<User?> Register(string email, string username, string password)
     {
         var storedUser = await Context.Users
             .SingleOrDefaultAsync(u => u.UserName == username);
@@ -41,11 +40,29 @@ public class AuthenticateGateway : BaseDatabaseGateway, IAuthenticateGateway
 
         var user = new InventoryIdentityUser
         {
+            Email = email,
             UserName = username
         };
 
         await _userManager.CreateAsync(user, password);
 
         return user.Adapt<User>();
+    }
+
+    private async Task<InventoryIdentityUser?> GetUserByEmailOrUsername(string? email, string? username)
+    {
+        if (email is not null)
+        {
+            return await Context.Users
+                .SingleOrDefaultAsync(u => u.Email == email);
+        }
+
+        if (username is not null)
+        {
+            return await Context.Users
+                .SingleOrDefaultAsync(u => u.UserName == username);
+        }
+
+        throw new InvalidOperationException();
     }
 }

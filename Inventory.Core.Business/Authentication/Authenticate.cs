@@ -18,11 +18,14 @@ public class Authenticate
 
     public async Task<Result<AuthenticationResponse>> Login(AuthenticationRequest request)
     {
-        var user = await _authenticate.Login(request.Username, request.Password);
+        if (string.IsNullOrWhiteSpace(request.Email) && string.IsNullOrWhiteSpace(request.Username)) 
+            return Result.Fail<AuthenticationResponse>(new NoEmailOrUsernameSpecifiedError());
+        
+        var user = await _authenticate.Login( request.Email, request.Username, request.Password);
         
         return user is null 
             ? Result.Fail<AuthenticationResponse>(new InvalidCredentialsError()) 
-            : Result.Ok(new AuthenticationResponse(user.Id, user.UserName));
+            : Result.Ok(new AuthenticationResponse(user.Id, user.Email, user.UserName));
     }
 
     public async Task<Result<AuthenticationResponse>> Register(AuthenticationRequest request)
@@ -32,10 +35,10 @@ public class Authenticate
         if (!UserValidator.IsPasswordValid(request.Password))
             return Result.Fail<AuthenticationResponse>(new InvalidPasswordError());
 
-        var user = await _authenticate.Register(request.Username, request.Password);
+        var user = await _authenticate.Register(request.Email, request.Username, request.Password);
         
         return user is null 
             ? Result.Fail<AuthenticationResponse>(new UsernameAlreadyInUseError()) 
-            : Result.Ok(new AuthenticationResponse(user.Id, user.UserName));
+            : Result.Ok(new AuthenticationResponse(user.Id, user.Email, user.UserName));
     }
 }
