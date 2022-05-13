@@ -18,12 +18,30 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 
 namespace Inventory.Presentations.Api.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddAppsettings(this IServiceCollection services, 
+    public static IServiceCollection AddAllServices(this IServiceCollection services, IConfiguration configuration, 
+        IWebHostEnvironment environment)
+    {
+        services.AddSettings(configuration)
+            .AddInventoryContext(environment)
+            .AddIdentity()
+            .AddGateways()
+            .AddUseCases()
+            .AddJwt()
+            .AddEndpointsApiExplorer()
+            .AddSwagger()
+            .AddControllers()
+            .AddNewtonsoftJson();
+
+        return services;
+    }
+
+    private static IServiceCollection AddSettings(this IServiceCollection services, 
         IConfiguration configuration)
     {
         var jwtSettings = new JwtSettings();
@@ -35,8 +53,8 @@ public static class ServiceCollectionExtensions
         
         return services;
     }
-    
-    public static IServiceCollection AddInventoryContext(this IServiceCollection services,
+
+    private static IServiceCollection AddInventoryContext(this IServiceCollection services,
         IWebHostEnvironment environment)
     {
         if (environment.IsDevelopment())
@@ -52,7 +70,7 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
-    public static IServiceCollection AddIdentity(this IServiceCollection services)
+    private static IServiceCollection AddIdentity(this IServiceCollection services)
     {
         services.AddIdentity<InventoryIdentityUser, IdentityRole>(
             o =>
@@ -68,7 +86,7 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
-    public static IServiceCollection AddGateways(this IServiceCollection services)
+    private static IServiceCollection AddGateways(this IServiceCollection services)
     {
         services.AddTransient<IGetInventoriesGateway, GetInventoriesGateway>()
             .AddTransient<ICreateInventoryGateway, CreateInventoryGateway>()
@@ -83,7 +101,7 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
-    public static IServiceCollection AddUseCases(this IServiceCollection services)
+    private static IServiceCollection AddUseCases(this IServiceCollection services)
     {
         services.AddTransient<CreateInventory>()
             .AddTransient<GetInventories>()
@@ -98,7 +116,7 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
-    public static IServiceCollection AddJwt(this IServiceCollection services)
+    private static IServiceCollection AddJwt(this IServiceCollection services)
     {
         string key; 
         
@@ -127,6 +145,36 @@ public static class ServiceCollectionExtensions
         });
 
         services.AddSingleton<IJwtTokenService, JwtTokenService>();
+
+        return services;
+    }
+
+    private static IServiceCollection AddSwagger(this IServiceCollection services)
+    {
+        services.AddSwaggerGen(options =>
+        {
+            options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+            {
+                In = ParameterLocation.Header,
+                Type = SecuritySchemeType.Http,
+                Scheme = "Bearer",
+                BearerFormat = "JWT",
+                Description = "JWT Authorization header using Bearer scheme."
+            });
+            options.AddSecurityRequirement(new OpenApiSecurityRequirement {
+                { 
+                    new OpenApiSecurityScheme 
+                    { 
+                        Reference = new OpenApiReference 
+                        { 
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer" 
+                        } 
+                    },
+                    Array.Empty<string>()
+                } 
+            });
+        });
 
         return services;
     }
