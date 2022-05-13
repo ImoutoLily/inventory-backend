@@ -1,5 +1,6 @@
-﻿using Inventory.Core.Business.InventoryItem;
-using Inventory.Core.Business.Models.Request;
+﻿using Inventory.Adapters.Models.Request;
+using Inventory.Core.Business.InventoryItem;
+using Inventory.Core.Models;
 using Inventory.Presentations.Api.Controllers.Abstract;
 using Mapster;
 using Microsoft.AspNetCore.JsonPatch;
@@ -13,7 +14,8 @@ public class InventoryItemController : BaseController
     private readonly UpdateInventoryItem _updateInventoryItem;
     private readonly RemoveInventoryItem _removeInventoryItem;
 
-    public InventoryItemController(GetInventoryItems getInventoryItems, UpdateInventoryItem updateInventoryItem, RemoveInventoryItem removeInventoryItem)
+    public InventoryItemController(GetInventoryItems getInventoryItems, 
+        UpdateInventoryItem updateInventoryItem, RemoveInventoryItem removeInventoryItem)
     {
         _getInventoryItems = getInventoryItems;
         _updateInventoryItem = updateInventoryItem;
@@ -35,11 +37,11 @@ public class InventoryItemController : BaseController
 
         if (getResult.Error is not null) return Ok(getResult);
 
-        var inventoryItem = getResult.Value!.Item.Adapt<InventoryItemRequest>();
+        var inventoryItem = getResult.Value!.Adapt<InventoryItemRequest>();
         
         request.ApplyTo(inventoryItem);
 
-        var updateResult = await _updateInventoryItem.Update(id, inventoryItem);
+        var updateResult = await _updateInventoryItem.Update(id, inventoryItem.Adapt<InventoryItem>());
 
         return Ok(updateResult);
     }

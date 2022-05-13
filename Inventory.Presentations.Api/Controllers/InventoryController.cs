@@ -1,7 +1,9 @@
-﻿using Inventory.Core.Business.Inventory;
+﻿using Inventory.Adapters.Models.Request;
+using Inventory.Core.Business.Inventory;
 using Inventory.Core.Business.InventoryItem;
-using Inventory.Core.Business.Models.Request;
+using Inventory.Core.Models;
 using Inventory.Presentations.Api.Controllers.Abstract;
+using Mapster;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Inventory.Presentations.Api.Controllers;
@@ -48,7 +50,7 @@ public class InventoryController : BaseController
     [HttpPost]
     public async Task<IActionResult> Create(InventoryRequest request)
     {
-        var result = await _createInventory.Create(request);
+        var result = await _createInventory.Create(request.Adapt<Core.Models.Inventory>());
 
         return Ok(result);
     }
@@ -56,7 +58,7 @@ public class InventoryController : BaseController
     [HttpPut("{id:int}")]
     public async Task<IActionResult> Update(int id, InventoryRequest request)
     {
-        var result = await _updateInventory.Update(id, request);
+        var result = await _updateInventory.Update(id, request.Adapt<Core.Models.Inventory>());
 
         return Ok(result);
     }
@@ -80,7 +82,7 @@ public class InventoryController : BaseController
     [HttpPost("{inventoryId:int}/Items")]
     public async Task<IActionResult> AddItem(int inventoryId, InventoryItemRequest request)
     {
-        var result = await _createInventoryItem.Create(inventoryId, request);
+        var result = await _createInventoryItem.Create(inventoryId, request.Adapt<InventoryItem>());
 
         return Ok(result);
     }

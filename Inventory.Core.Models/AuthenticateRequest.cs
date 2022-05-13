@@ -1,6 +1,6 @@
-﻿namespace Inventory.Core.Business.Models.Request;
+namespace Inventory.Core.Models;
 
-public class AuthenticationRequest
+public class AuthenticateRequest
 {
     public string Email { get; set; } = null!;
     public string Username { get; set; } = null!;

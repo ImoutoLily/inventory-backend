@@ -1,7 +1,6 @@
-﻿using Inventory.Core.Business.Errors;
-using Inventory.Core.Business.Errors.Abstract;
+﻿using Inventory.Core.Business.Errors.Abstract;
 
-namespace Inventory.Core.Business.Models.Core;
+namespace Inventory.Core.Business.Models;
 
 public class Result
 {

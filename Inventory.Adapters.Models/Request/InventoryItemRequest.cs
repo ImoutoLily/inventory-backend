@@ -1,4 +1,4 @@
-﻿namespace Inventory.Core.Business.Models.Request;
+namespace Inventory.Adapters.Models.Request;
 
 public class InventoryItemRequest
 {

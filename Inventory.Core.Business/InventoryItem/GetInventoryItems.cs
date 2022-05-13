@@ -1,8 +1,6 @@
 ﻿using Inventory.Core.Business.Errors;
-using Inventory.Core.Business.Gateways;
 using Inventory.Core.Business.Gateways.InventoryItem;
-using Inventory.Core.Business.Models.Core;
-using Inventory.Core.Business.Models.Response;
+using Inventory.Core.Business.Models;
 
 namespace Inventory.Core.Business.InventoryItem;
 
@@ -15,29 +13,29 @@ public class GetInventoryItems
         _getInventoryItems = getInventoryItems;
     }
 
-    public async Task<Result<InventoryItemResponse>> GetById(int id)
+    public async Task<Result<Core.Models.InventoryItem>> GetById(int id)
     {
         var inventoryItem = await _getInventoryItems.GetById(id);
 
         if (inventoryItem is null)
         {
-            return Result.Fail<InventoryItemResponse>(
+            return Result.Fail<Core.Models.InventoryItem>(
                 new EntityWithIdNotExistsError(typeof(Core.Models.InventoryItem), id));
         }
         
-        return Result.Ok(new InventoryItemResponse(inventoryItem));
+        return Result.Ok(inventoryItem);
     }
 
-    public async Task<Result<InventoryItemsResponse>> GetAllByInventoryId(int inventoryId)
+    public async Task<Result<IList<Core.Models.InventoryItem>>> GetAllByInventoryId(int inventoryId)
     {
         var inventoryItems = await _getInventoryItems.GetAllByInventoryId(inventoryId);
 
         if (inventoryItems is null)
         {
-            return Result.Fail<InventoryItemsResponse>(
+            return Result.Fail<IList<Core.Models.InventoryItem>>(
                 new EntityWithIdNotExistsError(typeof(Core.Models.Inventory), inventoryId));
         }
         
-        return Result.Ok(new InventoryItemsResponse(inventoryItems));
+        return Result.Ok(inventoryItems);
     }
 }

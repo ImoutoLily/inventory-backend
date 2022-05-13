@@ -1,5 +1,5 @@
 ﻿using Inventory.Core.Business.Authentication;
-using Inventory.Core.Business.Models.Request;
+using Inventory.Core.Models;
 using Inventory.Presentations.Api.Controllers.Abstract;
 using Inventory.Presentations.Jwt.Services.Abstract;
 using Microsoft.AspNetCore.Authorization;
@@ -21,7 +21,7 @@ public class AuthenticationController : BaseController
 
     [HttpPost("Login")]
     [AllowAnonymous]
-    public async Task<IActionResult> Login(AuthenticationRequest request)
+    public async Task<IActionResult> Login(AuthenticateRequest request)
     {
         var result = await _authenticate.Login(request);
 
@@ -30,14 +30,14 @@ public class AuthenticationController : BaseController
             return Ok(result);
         }
 
-        var token = _tokenService.GenerateToken(result.Value!.Username);
+        var token = _tokenService.GenerateToken(result.Value!.UserName);
 
         return Ok(token);
     }
 
     [HttpPost("Register")]
     [AllowAnonymous]
-    public async Task<IActionResult> Register(AuthenticationRequest request)
+    public async Task<IActionResult> Register(AuthenticateRequest request)
     {
         var result = await _authenticate.Register(request);
 
@@ -46,7 +46,7 @@ public class AuthenticationController : BaseController
             return Ok(result);
         }
 
-        var token = _tokenService.GenerateToken(result.Value!.Username);
+        var token = _tokenService.GenerateToken(result.Value!.UserName);
 
         return Ok(token);
     }

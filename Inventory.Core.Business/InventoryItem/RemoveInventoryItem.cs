@@ -1,7 +1,6 @@
 ﻿using Inventory.Core.Business.Errors;
-using Inventory.Core.Business.Gateways;
 using Inventory.Core.Business.Gateways.InventoryItem;
-using Inventory.Core.Business.Models.Core;
+using Inventory.Core.Business.Models;
 
 namespace Inventory.Core.Business.InventoryItem;
 

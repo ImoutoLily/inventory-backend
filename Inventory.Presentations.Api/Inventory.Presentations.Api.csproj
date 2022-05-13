@@ -15,6 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Inventory.Adapters.Models\Inventory.Adapters.Models.csproj" />
       <ProjectReference Include="..\Inventory.Core.Business.Gateways\Inventory.Core.Business.Gateways.csproj" />
       <ProjectReference Include="..\Inventory.Core.Business\Inventory.Core.Business.csproj" />
       <ProjectReference Include="..\Inventory.Database.Context\Inventory.Database.Context.csproj" />

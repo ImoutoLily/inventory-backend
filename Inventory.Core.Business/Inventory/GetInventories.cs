@@ -1,8 +1,6 @@
 ﻿using Inventory.Core.Business.Errors;
-using Inventory.Core.Business.Gateways;
 using Inventory.Core.Business.Gateways.Inventory;
-using Inventory.Core.Business.Models.Core;
-using Inventory.Core.Business.Models.Response;
+using Inventory.Core.Business.Models;
 
 namespace Inventory.Core.Business.Inventory;
 
@@ -15,23 +13,23 @@ public class GetInventories
         _getInventories = getInventories;
     }
 
-    public async Task<Result<InventoryResponse>> GetById(int id)
+    public async Task<Result<Core.Models.Inventory>> GetById(int id)
     {
         var inventory = await _getInventories.GetById(id);
 
         if (inventory is null)
         {
-            return Result.Fail<InventoryResponse>(
+            return Result.Fail<Core.Models.Inventory>(
                 new EntityWithIdNotExistsError(typeof(Core.Models.Inventory), id));
         }
         
-        return Result.Ok(new InventoryResponse(inventory));
+        return Result.Ok(inventory);
     }
     
-    public async Task<Result<InventoriesResponse>> GetAll()
+    public async Task<Result<IList<Core.Models.Inventory>>> GetAll()
     {
         var inventories = await _getInventories.GetAll();
 
-        return Result.Ok(new InventoriesResponse(inventories));
+        return Result.Ok(inventories);
     }
 }

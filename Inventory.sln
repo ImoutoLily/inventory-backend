@@ -28,6 +28,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventory.Core.Business.Val
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventory.Presentations.Jwt", "Inventory.Presentations.Jwt\Inventory.Presentations.Jwt.csproj", "{50EC22D5-ADBE-4068-9261-97C75156649F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Adapters", "Adapters", "{8A4B1E20-8492-4157-A088-86ABCC1087D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventory.Adapters.Models", "Inventory.Adapters.Models\Inventory.Adapters.Models.csproj", "{4F1F92C4-584E-48C8-8ACF-7D24B970303D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -74,6 +78,10 @@ Global
 		{50EC22D5-ADBE-4068-9261-97C75156649F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50EC22D5-ADBE-4068-9261-97C75156649F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50EC22D5-ADBE-4068-9261-97C75156649F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F1F92C4-584E-48C8-8ACF-7D24B970303D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F1F92C4-584E-48C8-8ACF-7D24B970303D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F1F92C4-584E-48C8-8ACF-7D24B970303D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F1F92C4-584E-48C8-8ACF-7D24B970303D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A912075A-374D-48ED-A16A-1223E235D97D} = {C67E4AC4-D527-44AC-ABCA-D4843C37DB75}
@@ -86,5 +94,6 @@ Global
 		{72D235DC-E71E-4C11-99C5-997D64D96B7C} = {50D68383-018E-4D46-8175-9310B5CCF964}
 		{DED74D73-E9EC-446F-98E3-6927538C2DE1} = {C67E4AC4-D527-44AC-ABCA-D4843C37DB75}
 		{50EC22D5-ADBE-4068-9261-97C75156649F} = {DA030D52-A707-4E46-856D-62984C7B4260}
+		{4F1F92C4-584E-48C8-8ACF-7D24B970303D} = {8A4B1E20-8492-4157-A088-86ABCC1087D2}
 	EndGlobalSection
 EndGlobal
