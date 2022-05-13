@@ -1,6 +1,8 @@
-﻿namespace Inventory.Presentations.Jwt.Services.Abstract;
+﻿using Inventory.Presentations.Jwt.Models;
+
+namespace Inventory.Presentations.Jwt.Services.Abstract;
 
 public interface IJwtTokenService
 {
-    string GenerateToken(string username);
+    JwtTokenResult GenerateToken(string username);
 }

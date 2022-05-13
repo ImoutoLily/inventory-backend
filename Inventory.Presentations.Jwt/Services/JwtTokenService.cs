@@ -18,7 +18,7 @@ public class JwtTokenService : IJwtTokenService
         _tokenHandler = new JwtSecurityTokenHandler();
     }
 
-    public string GenerateToken(string username)
+    public JwtTokenResult GenerateToken(string username)
     {
         var tokenDescriptor = new SecurityTokenDescriptor
         {
@@ -33,6 +33,9 @@ public class JwtTokenService : IJwtTokenService
 
         var token = _tokenHandler.CreateToken(tokenDescriptor);
 
-        return _tokenHandler.WriteToken(token);
+        return new JwtTokenResult
+        {
+            Token = _tokenHandler.WriteToken(token)
+        };
     }
 }
